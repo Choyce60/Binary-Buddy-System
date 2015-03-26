@@ -1,4 +1,4 @@
-Memory
+Memory (Object)
 	-size
 	Boolean hasBuddy
 	Memory buddy
