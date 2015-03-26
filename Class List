@@ -1,0 +1,13 @@
+Memory
+	-size
+	Boolean hasBuddy
+	Memory buddy
+	Process A
+
+Split()
+
+Merge()
+
+Main
+	-LinkedList<Memory>  thingsWeNeed
+
