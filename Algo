@@ -1,0 +1,8 @@
+To allocate a block, round the size up to the next highest power of 2 - let's call this value y.
+Take the log base 2 of y to get the free list number - let's call this m.
+Take the first available block from the front of free list m (all blocks are the same size so we don't need to hunt for one that's the correct size) and assign it to the process.
+If linked list m is empty then we must go to another free list. The obvious free list is the one that contains the next larger size of blocks, in this case free list number m+1.
+Free list m+1 will deliver a block of size 2*y, so we must divide the block in two, place one half on free list m and return the other half to the process making the request.
+If the m+1 link list does not contain a free block then we must move up to higher level lists until we find a block, then migrate the block down through the lower level lists, dividing the block in half each time.
+Eventually the m+1 list will get a block, divide it in two, and present a block to the m level. The algorithm picks up at step 5 above.
+If there are no free blocks available above the m level then the m+1 level will return a NULL. Now we simply pass the NULL value to the process.
