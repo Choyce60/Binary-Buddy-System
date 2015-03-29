@@ -28,8 +28,12 @@ public int roundSize (int inputBlock)
 public boolean hasBuddy(Integer buddy){
   Node current = node;
   
+  //go through every element/block in list checking if input equals any blocks
+  //in linked list return true is hasbuddy
   while (current != null) {
-    if (current.buddy.equals(buddy)) {
+  
+  //check if a block equals a buddy first and check if its correct buddy linked
+    if (current.buddy.equals(buddy) && current.next.buddy.equal(buddy)) {
       return true;
     } else {
       current = current.next;
@@ -41,6 +45,8 @@ public boolean hasBuddy(Integer buddy){
 public int memoryBuddy(Integer buddy){
   Node current = node;
   
+  //go through every element/block in list checking if input equals any blocks
+  //in linked list
   while (current != null) {
     if (current.buddy.equals(buddy)) {
       return buddy;
