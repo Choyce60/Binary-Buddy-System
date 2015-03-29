@@ -11,3 +11,16 @@ Merge()
 Main
 	-LinkedList<Memory>  thingsWeNeed
 
+
+//Round the input to a power of 2
+//example if inputBlock = 7, return will be 8
+
+public int roundSize (int inputBlock)
+   {
+        int power = 2;        
+        while (power < inputBlock) {
+                power = power * 2;
+        }
+	int blockAsPowerTwo = power;
+        return blockAsPowerTwo;
+   }
