@@ -24,3 +24,16 @@ public int roundSize (int inputBlock)
 	int blockAsPowerTwo = power;
         return blockAsPowerTwo;
    }
+   
+public boolean hasBuddy(Integer buddy){
+  Node current = node;
+  
+  while (current != null) {
+    if (current.buddy.equals(buddy)) {
+      return true;
+    } else {
+      current = current.next;
+    }
+  }
+  return false;
+}
