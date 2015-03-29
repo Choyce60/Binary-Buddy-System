@@ -30,16 +30,20 @@ public boolean hasBuddy(Integer buddy){
   
   //go through every element/block in list checking if input equals any blocks
   //in linked list return true is hasbuddy
-  while (current != null) {
   
-  //check if a block equals a buddy first and check if its correct buddy linked next to eachother
-    if (current.buddy.equals(buddy) && current.next.buddy.equal(buddy)) {
-      return true;
-    } else {
-      current = current.next;
+ public boolean hasBuddy(Node root, Integer buddy){
+    Node current = root;
+    while(current != null){
+       
+        if(buddy.equals(current.buddy) && buddy.next(current.buddy).equals(current.buddy) ){
+       
+        if(current.buddy.equals(buddy)){
+      
+         return true;
+        }
+        currentNode = root.next();//update current node
     }
-  }
-  return false;
+    return false;
 }
 
 public int memoryBuddy(Integer buddy){
@@ -51,8 +55,8 @@ public int memoryBuddy(Integer buddy){
     if (current.buddy.equals(buddy)) {
       return buddy;
     } else {
-      current = current.next;
+      current = current.next();
     }
   }
-  return false;
+  return null;
 }
