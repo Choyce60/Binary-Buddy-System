@@ -37,3 +37,16 @@ public boolean hasBuddy(Integer buddy){
   }
   return false;
 }
+
+public int memoryBuddy(Integer buddy){
+  Node current = node;
+  
+  while (current != null) {
+    if (current.buddy.equals(buddy)) {
+      return buddy;
+    } else {
+      current = current.next;
+    }
+  }
+  return false;
+}
