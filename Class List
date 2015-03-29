@@ -32,7 +32,7 @@ public boolean hasBuddy(Integer buddy){
   //in linked list return true is hasbuddy
   while (current != null) {
   
-  //check if a block equals a buddy first and check if its correct buddy linked
+  //check if a block equals a buddy first and check if its correct buddy linked next to eachother
     if (current.buddy.equals(buddy) && current.next.buddy.equal(buddy)) {
       return true;
     } else {
