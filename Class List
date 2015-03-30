@@ -108,7 +108,10 @@ public class BinaryBuddySystem
 				}
 				else if(input==3)
 				{
-					
+					System.out.println("Please input the name of the process to deallocate: ");
+					String target = scanInt.next();
+					deallocate(currentBank, target);
+					System.out.println(currentBank);	
 				}
 				else if(input==4)
 				{
