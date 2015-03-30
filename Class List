@@ -25,6 +25,42 @@ public int roundSize (int inputBlock)
         return blockAsPowerTwo;
    }
    
+   private static void runFileInput() throws IOException
+		{
+			Reader reader = new FileReader("../binarybuddy/src/BinaryBuddy/MemoryInput");
+	        BufferedReader br = new BufferedReader(reader);
+	        String line;
+	        if((line = br.readLine()) != null)
+	        {
+	        	int memoryBlockSize = roundSize(Integer.parseInt(line));
+	        	ArrayList<Memory> currentBank = createMemoryBlock(memoryBlockSize);
+		        while ((line = br.readLine()) != null) 
+		        {
+		        	int input = Integer.parseInt(line);
+				
+					if(input==1)
+					{
+						for(int i = 0; i<currentBank.size();i++)
+						{
+							System.out.println("Location: "+i+"\t"+"Value: "+currentBank.get(i).getValue()+"\t"+"Active Process? "+currentBank.get(i).getActive());	
+						}						
+					}
+					else if(input==2)
+					{
+						addProcess(currentBank,createProcess());
+					}
+					else if(input==3)
+					{
+						
+					}
+		        }
+	        }
+	        else
+	        {
+	        	System.out.println("File Is Empty Or Not Formatted Correctly.");
+	        }
+	}
+   
 public boolean hasBuddy(Integer buddy){
   Node current = node;
   
