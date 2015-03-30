@@ -148,6 +148,9 @@ public class BinaryBuddySystem
 		System.out.println("Please input the size of the process (in Mb): ");
 		int size = scanInt.nextInt();
 		Memory newProcess = new Memory(size);
+		System.out.println("Please input a string to identify this process: ");
+		String name = scanInt.next();
+		newProcess.setID(name);
 		return newProcess;
 	}
 	
@@ -189,8 +192,9 @@ public class BinaryBuddySystem
 	//Method to deallocate memory, uses a Memory object as a parameter
 	//sets active to false and attempts to merge
 	//returns either the merge is successful or only the deallocated memory will have its active flag changed 
-	private static ArrayList<Memory> deallocate(ArrayList<Memory> editableList, Memory finishedMem)
+	private static ArrayList<Memory> deallocate(ArrayList<Memory> editableList, String name)
 	{
+		Memory finishedMem = findProcess(editableList, name);
 		finishedMem.setActive(false);
 		return merge(editableList,finishedMem);
 	}
@@ -212,12 +216,27 @@ public class BinaryBuddySystem
 		}
 		return editableList;
 	}
+	//Method to find a process by its ID in the memory arraylist
+	//precondition: Process is in memory
+	private static Memory findProcess(ArrayList<Memory> editableList,String name)
+	{
+		
+			
+			for(int i = 0;i<editableList.size()-1;i++)
+			{
+				if(editableList.get(i).getName().equals(name))
+					return editableList.get(i);
+			}
+			System.out.println("Process was not found in memory!");
+			return new Memory(0);
+		
 }
 
 
 
 public class Memory 
 {
+	private String id;
 	private int value;
 	private boolean active;
 	private boolean hasBuddy;
@@ -266,6 +285,15 @@ public class Memory
 	public Memory getBuddy()
 	{
 		return buddy;
+	}
+	public void setID(String name)
+	{
+		id = name;
+	}
+	public String getName()
+	{
+		return id;
+	}
 }
 
 
