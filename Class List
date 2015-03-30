@@ -182,6 +182,23 @@ public class BinaryBuddySystem
 		}
 		return null;
 	}
+	//Merge method for merging 2 inactive buddies
+	//Will be called in deallocate memory method which will pass on a Memory parameter - Craig
+	private static ArrayList<Memory> merge(ArrayList<Memory> editableList,Memory emptyMem)
+	{
+		if(!(emptyMem.getActive())&& (emptyMem.getHasBuddy()))
+		{
+			if(!(emptyMem.getBuddy().getActive()))
+			{
+				editableList.remove(emptyMem.getBuddy());
+				emptyMem.setValue(emptyMem.getValue()*2);
+				
+			}
+			
+			
+		}
+		return editableList;
+	}
 }
 
 
