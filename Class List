@@ -60,3 +60,170 @@ public int memoryBuddy(Integer buddy){
   }
   return null;
 }
+
+
+
+
+
+
+
+
+
+//What I have so far for basic interface, Also uses a seperate Memory class added below!
+import java.util.*;
+
+public class BinaryBuddySystem 
+{
+	public static Scanner scanInt = new Scanner(System.in);
+	
+	public static void main(String[] args) 
+	{
+		int memoryBlockSize = setSystemSize();
+		System.out.println(memoryBlockSize);
+		
+		ArrayList<Memory> currentBank = createMemoryBlock(memoryBlockSize);
+		System.out.println(currentBank.get(0).getValue());
+		
+		while(0==0)
+		{
+			System.out.println("Please indicate a numeric action:"+"\n"+"1: Check System Status" +"\n"+"2: Add A Process"+"\n"+"3: Deactivate A Process"+"\n"+"4: Exit");
+			int input = scanInt.nextInt();
+			if(!(input>0 && input<4))
+			{
+				System.out.println("Invalid Numeric Input");
+			}
+			else
+			{
+				if(input==1)
+				{
+					for(int i = 0; i<currentBank.size();i++)
+					{
+						System.out.println("Location: "+i+"\t"+"Value: "+currentBank.get(i).getValue()+"\t"+"Active Process? "+currentBank.get(i).getActive());
+					}
+				}
+				else if(input==2)
+				{
+					addProcess(currentBank,createProcess());
+				}
+				else if(input==3)
+				{
+					
+				}
+				else if(input==4)
+				{
+					break;
+				}
+			}
+		}
+	}
+	
+	private static int roundSize (int inputBlock)
+	   {
+	        int power = 2;        
+	        while (power < inputBlock) {
+	                power = power * 2;
+	        }
+		int blockAsPowerTwo = power;
+	        return blockAsPowerTwo;
+	   }
+	
+	private static int setSystemSize()
+	{
+		System.out.println("Please input the the size of allocated space for memory storage (rounded to the nearest power of 2 in Mb): ");
+		int size = scanInt.nextInt();
+		return roundSize(size);
+	}
+	
+	private static ArrayList<Memory> createMemoryBlock(int systemSize)
+	{
+		Memory x = new Memory(systemSize);
+		ArrayList<Memory> memoryBlock = new ArrayList<Memory>();
+		memoryBlock.add(x);
+		return memoryBlock;
+	}
+	
+	private static Memory createProcess()
+	{
+		System.out.println("Please input the size of the process (in Mb): ");
+		int size = scanInt.nextInt();
+		Memory newProcess = new Memory(size);
+		return newProcess;
+	}
+	
+	private static ArrayList<Memory> addProcess(ArrayList<Memory> currentState, Memory newProcess)
+	{
+		for(int i = currentState.size()-1; i<0; i--)
+		{
+			int roundedProcessValue = roundSize(newProcess.getValue());
+			if(!currentState.get(i).getActive())
+			{
+				if(currentState.get(i).getValue()==roundedProcessValue)
+				{
+					currentState.set(i, newProcess);
+					break;
+				}
+				else if(currentState.get(i).getValue()>roundedProcessValue)
+				{
+					currentState = split(currentState, i);
+					i=currentState.size()-1;
+				}
+			}
+		}
+		return currentState;
+	}
+	
+	private static ArrayList<Memory> split(ArrayList<Memory> editableList, int locationOfEdit)
+	{
+		if(editableList.get(locationOfEdit).getValue()>1)
+		{
+			editableList.get(locationOfEdit).setValue(editableList.get(locationOfEdit).getValue()/2);
+			editableList.add(locationOfEdit, editableList.get(locationOfEdit));
+			return editableList;
+		}
+		return null;
+	}
+}
+
+
+
+public class Memory 
+{
+	private int value;
+	private boolean active;
+	
+	public Memory(int value)
+	{
+		this.value = value;
+		this.active = false;
+	}
+
+	public int getValue() 
+	{
+		return value;
+	}
+
+	public void setValue(int value) 
+	{
+		this.value = value;
+	}
+	
+	public boolean getActive()
+	{
+		return active;
+	}
+	
+	public void setActive(boolean active)
+	{
+		this.active = active;
+	}
+}
+
+
+
+
+
+
+
+
+
+
