@@ -74,6 +74,7 @@ import java.util.*;
 
 public class BinaryBuddySystem 
 {
+	public static int BINARY_MODIFIER = 2;
 	public static Scanner scanInt = new Scanner(System.in);
 	
 	public static void main(String[] args) 
@@ -182,6 +183,16 @@ public class BinaryBuddySystem
 		}
 		return null;
 	}
+	
+	//Method to deallocate memory, uses a Memory object as a parameter
+	//sets active to false and attempts to merge
+	//returns either the merge is successful or only the deallocated memory will have its active flag changed 
+	private static ArrayList<Memory> deallocate(ArrayList<Memory> editableList, Memory finishedMem)
+	{
+		finishedMem.setActive(false);
+		return merge(editableList,finishedMem);
+	}
+	
 	//Merge method for merging 2 inactive buddies
 	//Will be called in deallocate memory method which will pass on a Memory parameter - Craig
 	private static ArrayList<Memory> merge(ArrayList<Memory> editableList,Memory emptyMem)
@@ -191,7 +202,7 @@ public class BinaryBuddySystem
 			if(!(emptyMem.getBuddy().getActive()))
 			{
 				editableList.remove(emptyMem.getBuddy());
-				emptyMem.setValue(emptyMem.getValue()*2);
+				emptyMem.setValue(emptyMem.getValue()*BINARY_MODIFIER);
 				
 			}
 			
