@@ -88,7 +88,7 @@ public class BinaryBuddySystem
 		{
 			System.out.println("Please indicate a numeric action:"+"\n"+"1: Check System Status" +"\n"+"2: Add A Process"+"\n"+"3: Deactivate A Process"+"\n"+"4: Exit");
 			int input = scanInt.nextInt();
-			if(!(input>0 && input<4))
+			if(!(input>0 && input<5))
 			{
 				System.out.println("Invalid Numeric Input");
 			}
