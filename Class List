@@ -153,7 +153,7 @@ public class BinaryBuddySystem
 	
 	private static ArrayList<Memory> addProcess(ArrayList<Memory> currentState, Memory newProcess)
 	{
-		for(int i = currentState.size()-1; i<0; i--)
+		for(int i = 0; i<currentState.size(); i++)
 		{
 			int roundedProcessValue = roundSize(newProcess.getValue());
 			if(!currentState.get(i).getActive())
@@ -166,7 +166,7 @@ public class BinaryBuddySystem
 				else if(currentState.get(i).getValue()>roundedProcessValue)
 				{
 					currentState = split(currentState, i);
-					i=currentState.size()-1;
+					i=-1;
 				}
 			}
 		}
@@ -177,8 +177,10 @@ public class BinaryBuddySystem
 	{
 		if(editableList.get(locationOfEdit).getValue()>1)
 		{
-			editableList.get(locationOfEdit).setValue(editableList.get(locationOfEdit).getValue()/2);
-			editableList.add(locationOfEdit, editableList.get(locationOfEdit));
+			int tempNum = editableList.get(locationOfEdit).getValue()/2;
+			editableList.get(locationOfEdit).setValue(tempNum);
+			Memory splitMem = new Memory(tempNum);
+			editableList.add(locationOfEdit, splitMem);
 			return editableList;
 		}
 		return null;
