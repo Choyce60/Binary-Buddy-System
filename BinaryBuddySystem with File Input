@@ -1,3 +1,13 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.*;
+import java.io.*;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 public class BinaryBuddySystem 
 {
 	public static int BINARY_MODIFIER = 2;
@@ -6,10 +16,10 @@ public class BinaryBuddySystem
 
 	public static void main(String[] args) throws IOException 
 	{
-		do{
-			System.out.println("Please Choose Input Type: File: 1  Keyboard: 2");
-			int inputChoiceNum = scanInt.nextInt();
-			incorrectInput = false;
+			do{
+				System.out.println("Please Choose Input Type: File: 1  Keyboard: 2");
+				int inputChoiceNum = scanInt.nextInt();
+				incorrectInput = false;
 			if(inputChoiceNum<1 || inputChoiceNum>2)
 			{
 				System.out.println("Invalid Numeric Input");
@@ -253,18 +263,26 @@ public class BinaryBuddySystem
 
 	private static void runFileInput() throws IOException
 	{
-		Reader reader = new FileReader("../BinaryBuddy/src/BinaryBuddySystem/MemorySequenceInput");
+		JFileChooser chooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt Files Only", "txt");
+		chooser.setFileFilter(filter);
+		int returnVal = chooser.showOpenDialog(null);
+		if(returnVal == JFileChooser.APPROVE_OPTION) 
+		{
+			try 
+			{
+		BufferedReader br = new BufferedReader(new FileReader(chooser.getSelectedFile()));;
 		// need to change file location
-        BufferedReader br = new BufferedReader(reader);
-        String line;
-        if((line = br.readLine()) != null)
-        {
-        	int memoryBlockSize = roundSize(Integer.parseInt(line));
-        	ArrayList<Memory> currentBank = createMemoryBlock(memoryBlockSize);
-	        while ((line = br.readLine()) != null) 
-	        {
-	        	int input = Integer.parseInt(line);
-			
+		//BufferedReader br = new BufferedReader(reader);
+		String line;
+		if((line = br.readLine()) != null)
+		{
+			int memoryBlockSize = roundSize(Integer.parseInt(line));
+			ArrayList<Memory> currentBank = createMemoryBlock(memoryBlockSize);
+			while ((line = br.readLine()) != null) 
+			{
+				int input = Integer.parseInt(line);
+
 				if(input==1)
 				{
 					for(int i = 0; i<currentBank.size();i++)
@@ -285,14 +303,21 @@ public class BinaryBuddySystem
 					currentBank = deallocate(currentBank, s);
 					System.out.println("\n");
 				}
-	        }
-        }
-        else
-        {
-        	System.out.println("File Is Empty Or Not Formatted Correctly.");
-        }
+			}
+		}
+		br.close();
+			}
+			
+		catch (IOException e) 
+		{
+			System.out.println("File Read Error");
+		}
+		System.out.println("You chose to open this file: " +
+				chooser.getSelectedFile().getName());
 	}
-	
+		
+	}
+
 	private static int returnMaxPossibleInput(ArrayList<Memory> currentBlock)
 	{
 		int maxAllowedInput = 0;
@@ -305,5 +330,4 @@ public class BinaryBuddySystem
 		}
 		return maxAllowedInput;
 	}
-}
 }
