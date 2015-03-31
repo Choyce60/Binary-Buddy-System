@@ -236,6 +236,18 @@ public class BinaryBuddySystem
 
 		return editableList;
 	}
+	
+	//method to round the size of user block size input to a power of 2
+	private static int roundSize (int inputBlock)
+	{
+		int power = 2;        
+		while (power < inputBlock) 
+		{
+			power = power * 2;
+		}
+		int blockAsPowerTwo = power;
+		return blockAsPowerTwo;
+	}
 
 	private static Memory findProcess(ArrayList<Memory> editableList,String name)
 	{
