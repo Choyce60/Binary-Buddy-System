@@ -17,18 +17,23 @@ public class BinaryBuddySystem
 	public static void main(String[] args) throws IOException 
 	{
 			do{
+				//get input from user from either a File or from Keyboard
 				System.out.println("Please Choose Input Type: File: 1  Keyboard: 2");
 				int inputChoiceNum = scanInt.nextInt();
 				incorrectInput = false;
+				
+			//check if user chooses correct int from menu option above 1 or 2
 			if(inputChoiceNum<1 || inputChoiceNum>2)
 			{
 				System.out.println("Invalid Numeric Input");
 				incorrectInput=true;
 			}
+			//if user inputs 1 runFileInput
 			else if(inputChoiceNum == 1)
 			{
 				runFileInput();
 			}
+			//if user inputs 2 take input from keyboard
 			else if(inputChoiceNum == 2)
 			{
 				int memoryBlockSize = setSystemSize();
@@ -41,6 +46,8 @@ public class BinaryBuddySystem
 				{
 					do{
 						incorrectInput=false;
+						//allow the user to choose from int 1 - 4 for actions check status, add process, deactivate, exit
+						
 						System.out.println("Please indicate a numeric action:"+"\n"+"1: Check System Status" +"\n"+"2: Add A Process"+"\n"+"3: Deactivate A Process"+"\n"+"4: Exit");
 						int input = scanInt.nextInt();
 						if(!(input>0 && input<5))
@@ -84,7 +91,7 @@ public class BinaryBuddySystem
 		}while(incorrectInput);
 	}
 
-
+	//method to round the size of user block size input to a power of 2
 	private static int roundSize (int inputBlock)
 	{
 		int power = 2;        
@@ -96,6 +103,7 @@ public class BinaryBuddySystem
 		return blockAsPowerTwo;
 	}
 
+	//method that takes in input from user to set the size of space for memory storage
 	private static int setSystemSize()
 	{
 		do{
@@ -109,6 +117,7 @@ public class BinaryBuddySystem
 			}
 			else
 			{
+				//round user input to a power of 2
 				return roundSize(size);
 			}
 		}while(incorrectInput);
