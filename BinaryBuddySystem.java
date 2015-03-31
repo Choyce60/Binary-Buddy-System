@@ -64,7 +64,7 @@ public class BinaryBuddySystem
 		int size = scanInt.nextInt();
 		if(size < 1)
 		{
-		System.out.println("ERROR, Please input the the size of allocated space for memory storage greater than 0 ");
+			System.out.println("ERROR, Please input the the size of allocated space for memory storage greater than 0 ");
 		}else
 		{
 		return roundSize(size);
@@ -85,7 +85,7 @@ public class BinaryBuddySystem
 		int size = scanInt.nextInt();
 		if(size < 1)
 		{
-		System.out.println("ERROR, Please input size greater than 0");
+			System.out.println("ERROR, Please input size greater than 0");
 		}else
 		{
 		Memory newProcess = new Memory(size);
