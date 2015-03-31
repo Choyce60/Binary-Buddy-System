@@ -113,7 +113,7 @@ public class BinaryBuddySystem
 		}while(incorrectInput);
 		return (Integer) null;
 	}
-
+	//create and new momory block of int size
 	private static ArrayList<Memory> createMemoryBlock(int systemSize)
 	{
 		Memory x = new Memory(systemSize);
@@ -150,6 +150,7 @@ public class BinaryBuddySystem
 			return null;
 		}while(incorrectInput);
 	}
+	//create a new process with size and the process name Id
 	private static Memory createProcess(int size, String name)
 	{
 		Memory newProcess = new Memory(size);
@@ -181,7 +182,7 @@ public class BinaryBuddySystem
 		}
 		return currentState;
 	}
-
+	//split a buddy
 	private static ArrayList<Memory> split(ArrayList<Memory> editableList, int locationOfEdit)
 	{
 		if(editableList.get(locationOfEdit).getValue()>1)
@@ -199,7 +200,7 @@ public class BinaryBuddySystem
 		}
 		return null;
 	}
-
+	//deallocate method arrayList and using process name ID
 	private static ArrayList<Memory> deallocate(ArrayList<Memory> editableList, String name)
 	{
 		Memory finishedMem = findProcess(editableList, name);
@@ -207,7 +208,7 @@ public class BinaryBuddySystem
 		finishedMem.setID("");
 		return merge(editableList,finishedMem);
 	}
-
+	//using helper methods to find a buddy merge buddies to before split state
 	private static ArrayList<Memory> merge(ArrayList<Memory> editableList,Memory emptyMem)
 	{
 		boolean flag = false;
