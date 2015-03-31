@@ -62,7 +62,7 @@ public class BinaryBuddySystem
 	{
 		System.out.println("Please input the the size of allocated space for memory storage (rounded to the nearest power of 2 in Mb): ");
 		int size = scanInt.nextInt();
-		if(size < 0)
+		if(size < 1)
 		{
 		System.out.println("ERROR, Please input the the size of allocated space for memory storage greater than 0 ");
 		}else
@@ -83,7 +83,7 @@ public class BinaryBuddySystem
 	{
 		System.out.println("Please input the size of the process (in Mb): ");
 		int size = scanInt.nextInt();
-		if(size < 0)
+		if(size < 1)
 		{
 		System.out.println("ERROR, Please input size greater than 0");
 		}else
