@@ -248,8 +248,32 @@ public class BinaryBuddySystem
 		int blockAsPowerTwo = power;
 		return blockAsPowerTwo;
 	}
+	//find a process in memory via process name
+	private static Memory findProcess(ArrayList<Memory> editableList,String name)
+	{
 
+
+		for(int i = 0;i<editableList.size()-1;i++)
+		{
+			if(editableList.get(i).getName().equals(name))
+				return editableList.get(i);
+		}
+		System.out.println("Process was not found in memory!");
+		return new Memory(0);
+
+
+	}
 	
+	//assign a buddy to its correct partner for later  merging / splitting
+	private static void assignBuddy(Memory first, Memory second)
+	{
+		first.setHasBuddy(true);
+		second.setHasBuddy(true);
+		second.setBuddy(first);
+		first.setBuddy(second);
+	}
+
+	//read file from user
 	private static void runFileInput() throws IOException
 	{
 		JFileChooser chooser = new JFileChooser();
@@ -306,7 +330,7 @@ public class BinaryBuddySystem
 	}
 		
 	}
-
+	//method that returngs max possible inputs 
 	private static int returnMaxPossibleInput(ArrayList<Memory> currentBlock)
 	{
 		int maxAllowedInput = 0;
