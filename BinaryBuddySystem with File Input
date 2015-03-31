@@ -91,17 +91,7 @@ public class BinaryBuddySystem
 		}while(incorrectInput);
 	}
 
-	//method to round the size of user block size input to a power of 2
-	private static int roundSize (int inputBlock)
-	{
-		int power = 2;        
-		while (power < inputBlock) 
-		{
-			power = power * 2;
-		}
-		int blockAsPowerTwo = power;
-		return blockAsPowerTwo;
-	}
+
 
 	//method that takes in input from user to set the size of space for memory storage
 	private static int setSystemSize()
