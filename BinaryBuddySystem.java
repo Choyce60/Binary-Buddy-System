@@ -62,7 +62,13 @@ public class BinaryBuddySystem
 	{
 		System.out.println("Please input the the size of allocated space for memory storage (rounded to the nearest power of 2 in Mb): ");
 		int size = scanInt.nextInt();
+		if(size < 0)
+		{
+		System.out.println("ERROR, Please input the the size of allocated space for memory storage greater than 0 ");
+		}else
+		{
 		return roundSize(size);
+		}
 	}
 	
 	private static ArrayList<Memory> createMemoryBlock(int systemSize)
@@ -77,12 +83,18 @@ public class BinaryBuddySystem
 	{
 		System.out.println("Please input the size of the process (in Mb): ");
 		int size = scanInt.nextInt();
+		if(size < 0)
+		{
+		System.out.println("ERROR, Please input size greater than 0");
+		}else
+		{
 		Memory newProcess = new Memory(size);
 		System.out.println("Please input a string to identify this process: ");
 		String name = scanInt.next();
 		newProcess.setID(name);
 		newProcess.setActive(true);
 		return newProcess;
+		}
 	}
 	
 	private static ArrayList<Memory> addProcess(ArrayList<Memory> currentState, Memory newProcess)
