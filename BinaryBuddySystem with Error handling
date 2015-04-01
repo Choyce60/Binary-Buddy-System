@@ -175,7 +175,10 @@ public class BinaryBuddySystem
 			{
 				incorrectInput=true;
 				System.out.println("ERROR: Process too demanding for allocated space"+"\n"+"Please deallocate a running process or begin a smaller one"+"\n"+"The max process space for allocation is currently: "+returnMaxPossibleInput(currentBank));
+				return createProcess(currentBank);
 			}
+			
+			
 			else
 			{
 				Memory newProcess = new Memory(size);
