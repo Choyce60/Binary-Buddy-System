@@ -7,10 +7,10 @@ public class BinaryBuddySystem
 	public static void main(String[] args) 
 	{
 		int memoryBlockSize = setSystemSize();
-		System.out.println(memoryBlockSize);
+		//System.out.println(memoryBlockSize); 
 		
 		ArrayList<Memory> currentBank = createMemoryBlock(memoryBlockSize);
-		System.out.println(currentBank.get(0).getValue());
+		System.out.println("Memory Storage Size: " + currentBank.get(0).getValue());
 		
 		while(0==0)
 		{
@@ -18,7 +18,8 @@ public class BinaryBuddySystem
 			int input = scanInt.nextInt();
 			if(!(input>0 && input<5))
 			{
-				System.out.println("Invalid Numeric Input");
+				System.out.println("Invalid Input, please input a number 1 - 4 for correct menu options" + "\n");
+				
 			}
 			else
 			{
