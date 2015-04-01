@@ -170,6 +170,7 @@ public class BinaryBuddySystem
 			{
 				System.out.println("ERROR: Please input size greater than 0");
 				incorrectInput=true;
+				return createProcess(currentBank);
 			}
 			else if(size>returnMaxPossibleInput(currentBank))
 			{
@@ -188,7 +189,7 @@ public class BinaryBuddySystem
 				newProcess.setActive(true);
 				return newProcess;
 			}
-			return null;
+			//return null;
 		}while(incorrectInput);
 	}
 	//create a new process with size and the process name Id
