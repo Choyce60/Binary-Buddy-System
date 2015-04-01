@@ -7,10 +7,10 @@ public class BinaryBuddySystem
 	public static void main(String[] args) 
 	{
 		int memoryBlockSize = setSystemSize();
-		//System.out.println(memoryBlockSize); 
+		System.out.println(memoryBlockSize); 
 		
 		ArrayList<Memory> currentBank = createMemoryBlock(memoryBlockSize);
-		System.out.println("Memory Storage Size: " + currentBank.get(0).getValue());
+		System.out.println(currentBank.get(0).getValue());
 		
 		while(0==0)
 		{
