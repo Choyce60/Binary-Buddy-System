@@ -81,7 +81,14 @@ public class BinaryBuddySystem
 							{
 								for(int i = 0; i<currentBank.size();i++)
 								{
-									System.out.println("Location: "+i+"\t"+"Value: "+currentBank.get(i).getValue()+"\t"+"Active Process? "+currentBank.get(i).getActive()+"\t"+"ID Name: "+currentBank.get(i).getName());
+									if(currentBank.get(i).getHasBuddy())
+									{
+										System.out.println("Location: "+i+"\t"+"Value: "+currentBank.get(i).getValue()+"\t"+"Active Process? "+currentBank.get(i).getActive()+"\t"+"ID Name: "+currentBank.get(i).getName()+"\t"+"Buddy? "+currentBank.get(i).getHasBuddy()+"\t"+"MemId: "+currentBank.get(i)+"\t"+"BudId: "+currentBank.get(i).getBuddy());
+									}
+									else
+									{
+										System.out.println("Location: "+i+"\t"+"Value: "+currentBank.get(i).getValue()+"\t"+"Active Process? "+currentBank.get(i).getActive()+"\t"+"ID Name: "+currentBank.get(i).getName()+"\t"+"Buddy? "+currentBank.get(i).getHasBuddy()+"\t"+"MemId: "+currentBank.get(i));
+									}
 								}
 							}
 							else if(input==2)
@@ -255,6 +262,7 @@ public class BinaryBuddySystem
 		Memory finishedMem = findProcess(editableList, name);
 		finishedMem.setActive(false);
 		finishedMem.setID("");
+		finishedMem.setValue(roundSize(finishedMem.getValue()));
 		return merge(editableList,finishedMem);
 	}
 	//using helper methods to find a buddy merge buddies to before split state
@@ -264,24 +272,30 @@ public class BinaryBuddySystem
 		while(!flag)
 		{
 			flag=true;
-			if(!(emptyMem.getActive())&& (emptyMem.getHasBuddy()))
-			{
-				if(!(emptyMem.getBuddy().getActive()))
-				{
-					editableList.remove(emptyMem.getBuddy());
-					emptyMem.setValue(roundSize(emptyMem.getValue())*BINARY_MODIFIER);
-					//Memory newMem = editableList.get(editableList.indexOf(emptyMem));
-					for(int i=1;i<editableList.size();i++)
+			//Memory newMem = editableList.get(editableList.indexOf(emptyMem));
+			//if(!(emptyMem.getActive())/*&& (emptyMem.getHasBuddy())*/)
+			//{
+				//if(!(emptyMem.getBuddy().getActive()))
+				//{
+					/*
+					 * editableList.remove(emptyMem.getBuddy());
+					 *	emptyMem.setBuddy(null);
+					 *	emptyMem.setHasBuddy(false);
+					emptyMem.setValue(roundSize(emptyMem.getValue())*BINARY_MODIFIER);*/
+					for(int i=editableList.size()-1;i>0;i--)
 					{
 						if(!editableList.get(i).getActive()&&!editableList.get(i-1).getActive()&&editableList.get(i).getValue()==editableList.get(i-1).getValue())
 						{
 							flag=false;
-							emptyMem=editableList.get(i);
-							emptyMem.setBuddy(editableList.get(i-1));
+							editableList.get(i-1).setValue(roundSize(editableList.get(i-1).getValue())*BINARY_MODIFIER);
+							//emptyMem.setBuddy(editableList.get(i));
+							//emptyMem.setValue(roundSize(emptyMem.getValue())*BINARY_MODIFIER);
+							//emptyMem.setHasBuddy(true);
+							editableList.remove(editableList.get(i));
 						}
 					}
-				}
-			}
+				//}
+			//}
 		}
 
 		return editableList;

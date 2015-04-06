@@ -5,8 +5,7 @@ public class Memory
 	private int value;
 	private boolean active;
 	private boolean hasBuddy;
-	private Memory buddy;
-	
+	private Memory buddy, parent;
 	
 	public Memory(int value)
 	{
@@ -15,6 +14,18 @@ public class Memory
 		this.active = false;
 		this.hasBuddy = false;
 		buddy = null;
+		parent = null;
+	}
+	
+	public void setParent(Memory papa)
+	{
+		parent = papa;
+	}
+	
+	
+	public Memory getParent()
+	{
+		return parent;
 	}
 
 	public int getValue() 
