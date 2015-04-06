@@ -14,6 +14,9 @@ public class BinaryBuddySystem
 	public static Scanner scanInt = new Scanner(System.in);
 	private static boolean incorrectInput = false;
 
+	/*
+	 * Testing git hub / eclipse combo
+	 */
 	public static void main(String[] args) throws IOException 
 	{
 			do{
