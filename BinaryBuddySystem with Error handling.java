@@ -16,6 +16,8 @@ public class BinaryBuddySystem
 
 	/*
 	 * Testing git hub / eclipse combo
+	 *
+	 * Now attempting to pull from git to eclipse
 	 */
 	public static void main(String[] args) throws IOException 
 	{
