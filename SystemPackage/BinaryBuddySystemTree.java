@@ -5,51 +5,36 @@ import java.util.ArrayList;
 public class BinaryBuddySystemTree 
 {
 	private static ArrayList<Memory> currentBank;
-	private static StandardizedInput input; 
 	private static int systemSize;
 	private static BinaryBuddySystemGUI BBSGUI;
 	
-	public BinaryBuddySystemTree()
+	public BinaryBuddySystemTree(int initial)
 	{
 		currentBank = new ArrayList<Memory>();
-		input = new StandardizedInput();
 		BBSGUI = new BinaryBuddySystemGUI();
-		setSystemSize();
+		setSystemSize(initial);
 	}
 
 	//method that takes in input from user to set the size of space for memory storage
-	private void setSystemSize()
+	private void setSystemSize(int initial)
 	{
-			System.out.println("Please input the the size of allocated space for memory storage (rounded to the nearest power of 2 in Mb): ");
-			systemSize = input.scanIntegerBetween(1, Integer.MAX_VALUE);
+			systemSize = initial;
 			Memory x = new Memory(roundSize(systemSize));
 			currentBank.add(x);
-			BBSGUI.drawGUI(systemSize, currentBank);
+			BBSGUI.drawGUI(systemSize, currentBank); 
 	}
 
-	public Memory createProcess()
+	private Memory createProcess(int memSize, String name)
 	{
-			System.out.println("Please input the size of the process (in Mb): ");
-			int memSize = input.scanIntegerBetween(1, returnMaxPossibleInput());
 				Memory newProcess = new Memory(memSize);
-				System.out.println("Please input a string to identify this process: ");
-				String name = input.scanString();
 				newProcess.setID(name);
 				newProcess.setActive(true);
 				return newProcess;
 	}
-	//create a new process with size and the process name Id
-	private Memory createProcess(int size, String name)
+	
+	public void addProcess(int memSize, String name)
 	{
-		Memory newProcess = new Memory(size);
-		newProcess.setID(name);
-		newProcess.setActive(true);
-		return newProcess;
-	}
-
-	public void addProcess()
-	{
-		Memory newProcess = createProcess();
+		Memory newProcess = createProcess(memSize, name);
 		for(int i = 0; i<currentBank.size(); i++)
 		{
 			int roundedProcessValue = roundSize(newProcess.getValue());
@@ -142,7 +127,7 @@ public class BinaryBuddySystemTree
 	}
 
 	//method that returns max possible inputs 
-	private static int returnMaxPossibleInput()
+	public int returnMaxPossibleInput()
 	{
 		int maxAllowedInput = 0;
 		for(int i=0;i<currentBank.size();i++)

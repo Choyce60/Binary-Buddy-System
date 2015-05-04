@@ -15,7 +15,9 @@ public class BinaryBuddySystemRunner
 		//if user inputs 2 take input from keyboard
 		else if(inputChoiceNum == 2)
 		{
-			BinaryBuddySystemTree BBST = new BinaryBuddySystemTree();
+			System.out.println("Please input the the size of allocated space for memory storage (rounded to the nearest power of 2 in Mb): ");
+			int systemSize = input.scanIntegerBetween(1, Integer.MAX_VALUE);
+			BinaryBuddySystemTree BBST = new BinaryBuddySystemTree(systemSize);
 			while(0==0)
 			{
 				//allow the user to choose from int 1 - 4 for actions check status, add process, deactivate, exit
@@ -27,7 +29,11 @@ public class BinaryBuddySystemRunner
 				}
 				else if(num==2)
 				{
-					BBST.addProcess();
+					System.out.println("Please input the size of the process (in Mb): ");
+					int memSize = input.scanIntegerBetween(1, BBST.returnMaxPossibleInput());
+					System.out.println("Please input a string to identify this process: ");
+					String name = input.scanString();
+					BBST.addProcess(memSize, name);
 				}
 				else if(num==3)
 				{
