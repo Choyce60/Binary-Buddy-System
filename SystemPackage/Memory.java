@@ -4,16 +4,13 @@ public class Memory
 	private String id;
 	private int value;
 	private boolean active;
-	private boolean hasBuddy;
-	private Memory buddy, parent;
+	private Memory parent;
 	
 	public Memory(int value)
 	{
 		this.id = "";
 		this.value = value;
 		this.active = false;
-		this.hasBuddy = false;
-		buddy = null;
 		parent = null;
 	}
 	
@@ -48,25 +45,6 @@ public class Memory
 		this.active = active;
 	}
 	
-	public boolean getHasBuddy()
-	{
-		return hasBuddy;
-	}
-	
-	public void setHasBuddy(boolean tf)
-	{
-		hasBuddy = tf;
-	}
-	
-	
-	public void setBuddy(Memory newFriend)
-	{
-		buddy = newFriend;
-	}
-	public Memory getBuddy()
-	{
-		return buddy;
-	}
 	public void setID(String name)
 	{
 		id = name;
@@ -74,6 +52,11 @@ public class Memory
 	public String getName()
 	{
 		return id;
+	}
+	
+	public String toString()
+	{
+		return ("Value: " + value + ", Active: " + active + ", ID: " + id);	
 	}
 	
 }
