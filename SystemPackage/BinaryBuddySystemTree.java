@@ -14,6 +14,13 @@ public class BinaryBuddySystemTree
 		BBSGUI = new BinaryBuddySystemGUI();
 		setSystemSize(initial);
 	}
+	//Default constructor that sets total memory size to 64
+	public BinaryBuddySystemTree()
+	{
+		currentBank = new ArrayList<Memory>();
+		BBSGUI = new BinaryBuddySystemGUI();
+		setSystemSize(64);
+	}
 
 	//method that takes in input from user to set the size of space for memory storage
 	private void setSystemSize(int initial)
@@ -57,7 +64,7 @@ public class BinaryBuddySystemTree
 		BBSGUI.drawGUI(systemSize, currentBank);
 	}
 	//split a buddy
-	private static ArrayList<Memory> split(int locationOfEdit)
+	private ArrayList<Memory> split(int locationOfEdit)
 	{
 		if(currentBank.get(locationOfEdit).getValue()>1)
 		{
@@ -115,7 +122,7 @@ public class BinaryBuddySystemTree
 		return blockAsPowerTwo;
 	}
 	//find a process in memory via process name
-	private static Memory findProcess(String name)
+	public Memory findProcess(String name)
 	{
 		for(int i = 0;i<currentBank.size();i++)
 		{

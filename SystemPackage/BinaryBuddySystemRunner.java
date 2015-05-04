@@ -1,16 +1,68 @@
 package SystemPackage;
-
+import java.util.Random;
+import java.util.ArrayList;
 public class BinaryBuddySystemRunner 
 {
+	
 	public static void main(String[] args)
 	{
+		
 		//get input from user from either a File or from Keyboard
 		StandardizedInput input = new StandardizedInput();
 		System.out.println("Please Choose Input Type: Generated: 1  Keyboard: 2");
 		int inputChoiceNum = input.scanIntegerBetween(1,2);
 		if(inputChoiceNum == 1)
 		{
-			
+			BinaryBuddySystemTree bbst = new BinaryBuddySystemTree();
+			ArrayList<String> active = new ArrayList();
+			int counter = 1;
+			do{
+				
+				Random rand = new Random();
+				
+				if(bbst.returnMaxPossibleInput()==64)
+				{
+					String processName = String.valueOf(counter);
+					bbst.addProcess(rand.nextInt(64)+1, processName);
+					active.add(processName);
+					counter++;
+					System.out.println("Allocate: "+bbst.findProcess(processName));
+					sleep();
+					
+				}
+				else if(bbst.returnMaxPossibleInput()<=4)
+				{
+					Memory temp = bbst.findProcess(active.remove(rand.nextInt(active.size())));
+					System.out.println("Deallocate: "+temp);
+					bbst.deallocate(temp.getName());
+					sleep();					
+					
+				}
+				else
+				{
+					int decision = rand.nextInt(100)%2;
+					
+					switch(decision){
+					case 0: Memory temp = bbst.findProcess(active.remove(rand.nextInt(active.size())));
+							System.out.println("Deallocate: "+temp);
+							bbst.deallocate(temp.getName());
+							sleep();
+							break;
+					case 1: String processName = String.valueOf(counter);
+							bbst.addProcess(rand.nextInt(bbst.returnMaxPossibleInput()), processName);
+							active.add(processName);
+							counter++;
+							System.out.println("Allocate: "+bbst.findProcess(processName));
+							sleep();
+							break;
+					default: System.out.println("Invalid decision value, alloc or dealloc cannot be decided");
+					
+					}
+							
+						
+							
+				}
+			}while(counter<100);
 		}
 		//if user inputs 2 take input from keyboard
 		else if(inputChoiceNum == 2)
@@ -47,6 +99,15 @@ public class BinaryBuddySystemRunner
 					System.exit(0);
 				}
 			}
+		}
+	}
+	//method to slow down the demo so we can observe the actions being performed
+	private static void sleep()
+	{
+		try {
+		    Thread.sleep(500);                 //1000 milliseconds is one second.
+		} catch(InterruptedException ex) {
+		    Thread.currentThread().interrupt();
 		}
 	}
 
