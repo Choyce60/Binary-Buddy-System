@@ -1,0 +1,261 @@
+package SystemPackage;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+//import static SystemPackage.BinaryBuddySystemTree.allocate;
+//import static SystemPackage.BinaryBuddy.deallocate;
+
+/**
+ * The test class BinaryBuddyDriver.
+ *
+ * @author  (your name)
+ * @version (a version number or a date)
+ */
+public class BinaryBuddySystemTreeTest
+{
+    /**
+     * Default constructor for test class BinaryBuddyDriver
+     */
+    public BinaryBuddySystemTreeTest()
+    {
+    }
+
+    /**
+     * Sets up the test fixture.
+     *
+     * Called before every test case method.
+     */
+    @Before
+    public void setUp()
+    {
+    	
+    }
+
+    /**
+     * Tears down the test fixture.
+     *
+     * Called after every test case method.
+     */
+    @After
+    public void tearDown()
+    
+    {
+    	
+    }
+
+
+    /**
+     * Set The size of the System
+     */
+    @Test
+    public void SetSystemSizeTest1()
+    {
+        //Uses valid inputs
+        ArrayList <Memory> memList = BinaryBuddySystemTree.setSystemSize(64);
+        System.out.println("Number of memory blocks in arraylist should be 1"); 
+        System.out.println("Number of memory blocks in arraylist is " + memList.size());
+        System.out.println("Size of memory block should be 64");
+        System.out.println("Size of memory block is " + memList.get(0).getValue());
+
+        System.out.println("\n\n");
+
+        
+    }
+    
+    @Test
+	public void roundSizeTest(){
+		BinaryBuddySystemTree test = new BinaryBuddySystemTree(0);
+		int result = test.roundSize(3);
+		assertEquals(4, result);
+		
+		result = test.roundSize(4);
+		assertEquals(4, result);
+		
+		result = test.roundSize(63);
+		assertEquals(64, result);
+		
+		result = test.roundSize(1);
+		assertEquals(2, result);
+		
+		result = test.roundSize(61);
+		assertEquals(64, result);
+		
+		result = test.roundSize(8);
+		assertEquals(8, result);
+		
+	}
+	
+    /**
+     * Test CreateProccess method, located in BinaryBuddySystem Class
+     */
+    @Test
+    public void CreateProcessTestSmall()
+    {
+        System.out.println("Int and String entered should be returned in followup print statement");
+        
+        Memory A = BinaryBuddySystemTree.createProcess();
+        
+        System.out.println("Size of Memory block " + A.getName() + " is " + A.getValue());
+        
+        Memory B = BinaryBuddySystemTree.createProcess();
+        
+        System.out.println("Size of Memory block " + B.getName() + " is " + B.getValue());
+    }
+    /**
+     * Test CreateProccess method, located in BinaryBuddySystem Class
+     */
+    @Test
+    public void CreateProcessTestBig()
+    {
+        System.out.println("Int and String entered should be returned in followup print statement");
+        
+        Memory A = BinaryBuddySystemTree.createProcess();
+        
+        System.out.println("Size of Memory block " + A.getName() + " is " + A.getValue());
+        
+        Memory B = BinaryBuddySystemTree.createProcess();
+        
+        System.out.println("Size of Memory block " + B.getName() + " is " + B.getValue());
+        
+        Memory C = BinaryBuddySystemTree.createProcess();
+        
+        System.out.println("Size of Memory block " + C.getName() + " is " + C.getValue());
+        
+        Memory D = BinaryBuddySystemTree.createProcess();
+        
+        System.out.println("Size of Memory block " + D.getName() + " is " + D.getValue());
+        
+        Memory E = BinaryBuddySystemTree.createProcess();
+        
+        System.out.println("Size of Memory block " + E.getName() + " is " + E.getValue());
+        
+        Memory F = BinaryBuddySystemTree.createProcess();
+        
+        System.out.println("Size of Memory block " + F.getName() + " is " + F.getValue());
+    }
+
+    
+    /**
+     * Test AddProcess method, located in BinaryBuddySystem Class
+     */
+    @Test
+    public void AddProcessTest()
+    {
+    	ArrayList<Memory> currentBank = BinaryBuddySystemTree.createMemoryBlock(64);
+    	
+        System.out.println("\n" + "Enter 16 for size");
+        
+        Memory A = BinaryBuddySystemTree.createProcess();
+        ArrayList<Memory> resultList = BinaryBuddySystemTree.addProcess(currentBank, A);
+        
+        assertEquals(2, resultList.size());
+        
+        System.out.println("The first item in the array should be the input for name");
+        
+        System.out.println("The first item in the array is " + resultList.get(0).getName());
+        
+        System.out.println("Both objects in the arraylist should return a value(block size) 16");
+       
+        System.out.println("First object is size " + resultList.get(0).getValue() +
+            " and the second object is size " + resultList.get(1).getValue());
+    }
+
+    /**
+     * Test split method, located in BinaryBuddySystem Class
+     */
+    @Test
+    public void splitTest()
+    {
+        java.util.ArrayList<Memory> systemTest = BinaryBuddySystemTree.createMemoryBlock(64);
+        System.out.println("Enter 4 for process size and A for name.");
+        
+        Memory A = BinaryBuddySystemTree.createProcess();
+
+        System.out.println("After adding process A,"+ 
+            "the memory should be split into two size 4 blocks, a size 8 block, and a size 16 block");
+        ArrayList<Memory> addedA = BinaryBuddySystemTree.addProcess(systemTest, A);
+        assertEquals(4, addedA.size());
+        
+        System.out.println(" Starting at index 0, these are the sizes of the blocks: " + 
+            addedA.get(0).getValue() + ","+ addedA.get(1).getValue()+","+addedA.get(2).getValue()+","+
+            addedA.get(3).getValue());
+        
+        System.out.println("All blocks should be inactive except the first block of size 4.");
+        System.out.println("These are the statuses of the blocks in order: " + addedA.get(0).getActive() + ","+ 
+            addedA.get(1).getActive()+","+addedA.get(2).getActive()+","+addedA.get(3).getActive());
+
+    }
+    
+    /**
+     * Test deallocate method, located in BinaryBuddySystem Class
+     */
+    @Test
+    public void deallocateTest()
+    {
+        java.util.ArrayList<Memory> systemTest = BinaryBuddySystemTree.createMemoryBlock(32);
+        Memory A = BinaryBuddySystemTree.createProcess();
+        java.util.ArrayList<Memory> oneProcessList = BinaryBuddySystemTree.addProcess(systemTest, A);
+        System.out.println("Size of the list with one size 16 process in it is 2.");
+        System.out.println("Size of the list is " + oneProcessList.size());
+
+        java.util.ArrayList<Memory> resultList = BinaryBuddySystemTree.deallocate(oneProcessList, "A");
+        System.out.println("Resulting memory after the deallocation should have an arraylist of size 1");
+        System.out.println("Resulting arraylist is size " + resultList.size());
+    }
+
+    /**
+     * Test merge method, located in BinaryBuddySystem Class
+     */
+    @Test
+    public void mergeTest()
+    {
+        ArrayList<Memory> systemTest = BinaryBuddySystemTree.createMemoryBlock(64);
+        System.out.println("Enter 8 for size and A for name.");
+        Memory A = BinaryBuddySystemTree.createProcess();
+        System.out.println("Enter 4 for size and B for name.");
+        Memory B = BinaryBuddySystemTree.createProcess();
+        System.out.println("Enter 4 for size and C for name.");
+        Memory C = BinaryBuddySystemTree.createProcess();
+        
+        ArrayList<Memory> addedA = BinaryBuddySystemTree.addProcess(systemTest, A);
+        ArrayList<Memory> addedAB = BinaryBuddySystemTree.addProcess(addedA, B);
+        ArrayList<Memory> addedAll = BinaryBuddySystemTree.addProcess(addedAB, C);
+        System.out.println("Arraylist should be size 4 and is size " +addedAll.size()+"\n");
+        System.out.println("The sizes of the blocks are: " + addedAll.get(0).getValue() + "," +
+            addedAll.get(1).getValue() + "," + addedAll.get(2).getValue() + "," + addedAll.get(3).getValue()+"\n");
+        ArrayList<Memory> removedA = BinaryBuddySystemTree.deallocate(addedAll, "A");
+        System.out.println("Removed process A, size of list should still be 4 and is " + removedA.size()+"\n");
+        System.out.println("In order the activity of the blocks should be false, true, true, false.");
+        System.out.println("The activity of the blocks is: " + removedA.get(0).getActive() + "," +
+            removedA.get(1).getActive() + "," + removedA.get(2).getActive() + "," + removedA.get(3).getActive() + "\n");
+        System.out.println("The size of the blocks should be the same as before A was removed as none should have" +
+            "merged yet");
+        System.out.println("The sizes of the blocks are: " + removedA.get(0).getValue() + "," +
+            removedA.get(1).getValue() + "," + removedA.get(2).getValue() + "," + removedA.get(3).getValue()+"\n");
+        ArrayList<Memory> removedAB = BinaryBuddySystemTree.deallocate(removedA, "B");
+        
+        System.out.println("The activity of the blocks should be false, false, true, false.");
+        System.out.println("The activity of the blocks is: " + removedAB.get(0).getActive() + "," +
+            removedAB.get(1).getActive() + "," + removedAB.get(2).getActive() + "," + removedAB.get(3).getActive()+"\n");
+        System.out.println("The sizes of the blocks should be the same as before as none have merged yet.");
+        System.out.println("The sizes of the blocks are: " + removedAB.get(0).getValue() + "," +
+            removedAB.get(1).getValue() + "," + removedAB.get(2).getValue() + "," + removedAB.get(3).getValue()+"\n");
+        ArrayList<Memory> finalResult = BinaryBuddySystemTree.deallocate(removedAB, "C");
+        
+        System.out.println("Now that C is removed, there should be three merges resulting in a list of size 1.");
+        System.out.println("The size of the resulting list is " + finalResult.size()+"\n");
+        System.out.println("The block size of the result should be 32, the same as when it started.");
+        System.out.println("The block size is " + finalResult.get(0).getValue()+"\n");
+        System.out.println("The activity should have been set to false as well.");
+        System.out.println("The activity of the block is " + finalResult.get(0).getActive()+"\n");
+    }
+}
+
+}
+
