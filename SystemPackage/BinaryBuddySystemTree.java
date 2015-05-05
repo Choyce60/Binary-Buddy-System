@@ -29,10 +29,10 @@ public class BinaryBuddySystemTree
 			Memory x = new Memory(roundSize(systemSize));
 			currentBank.add(x);
 			BBSGUI.drawGUI(systemSize, currentBank);
-			return roundSize(systemSize);
+			return currentBank.get(0).getValue();
 	}
 
-	private Memory createProcess(int memSize, String name)
+	public Memory createProcess(int memSize, String name)
 	{
 				Memory newProcess = new Memory(memSize);
 				newProcess.setID(name);
@@ -42,6 +42,7 @@ public class BinaryBuddySystemTree
 	
 	public boolean addProcess(int memSize, String name)
 	{
+		int size = currentBank.size();
 		Memory newProcess = createProcess(memSize, name);
 		for(int i = 0; i<currentBank.size(); i++)
 		{
@@ -63,9 +64,10 @@ public class BinaryBuddySystemTree
 			}
 		}
 		BBSGUI.drawGUI(systemSize, currentBank);
+		return(size<currentBank.size());
 	}
 	//split a buddy
-	private ArrayList<Memory> split(int locationOfEdit)
+	public ArrayList<Memory> split(int locationOfEdit)
 	{
 		if(currentBank.get(locationOfEdit).getValue()>1)
 		{
@@ -82,7 +84,7 @@ public class BinaryBuddySystemTree
 		return null;
 	}
 	//deallocate method arrayList and using process name ID
-	public void deallocate(String name)
+	public int deallocate(String name)
 	{
 		Memory finishedMem = findProcess(name);
 		finishedMem.setActive(false);
@@ -90,9 +92,10 @@ public class BinaryBuddySystemTree
 		finishedMem.setValue(roundSize(finishedMem.getValue()));
 		merge(finishedMem);
 		BBSGUI.drawGUI(systemSize, currentBank);
+		return currentBank.size();
 	}
 	//using helper methods to find a buddy merge buddies to before split state
-	private static void merge(Memory emptyMem)
+	public ArrayList<Memory> merge(Memory emptyMem)
 	{
 		boolean flag = false;
 		while(!flag)
@@ -109,10 +112,11 @@ public class BinaryBuddySystemTree
 						}
 					}
 		}
+		return currentBank;
 	}
 	
 	//method to round the size of user block size input to a power of 2
-	private static int roundSize (int inputBlock)
+	public int roundSize (int inputBlock)
 	{
 		int power = 2;        
 		while (power < inputBlock) 
@@ -155,5 +159,10 @@ public class BinaryBuddySystemTree
 			System.out.println("Location: "+i+"\t"+"Value: "+currentBank.get(i).getValue()+"\t"+"Active Process? "+currentBank.get(i).getActive()+"\t"+"ID Name: "+currentBank.get(i).getName());
 		}
 		BBSGUI.drawGUI(systemSize, currentBank);
+	}
+	
+	public ArrayList<Memory> getCurrentList()
+	{
+		return currentBank;
 	}
 }

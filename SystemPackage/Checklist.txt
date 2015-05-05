@@ -1,9 +1,0 @@
-Things left to do...
-(DONE)Separate I/O from main class
-(DONE)Clean up code
-(DONE)Include GUI in all methods (constant updates to allocation/deallocation)
-(DONE)Fix random deallocation error
---Include GUI I/O
---Create random number generator for allocation / deallocation
---Proper JavaDOC commenting
---JUnit Testing

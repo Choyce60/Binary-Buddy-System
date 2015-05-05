@@ -10,3 +10,10 @@
 /SystemSizeTest.class
 /ReturnMaxPossibleInputTest.class
 /FindProcessTest.class
+/RoundSizeTest.class
+/MergeTest.class
+/AddProcessTest.class
+/CreateProcessTest.class
+/DeallocateTest.class
+/SplitTest.class
+/JUnitRunner.class

@@ -59,4 +59,16 @@ public class Memory
 		return ("Value: " + value + ", Active: " + active + ", ID: " + id);	
 	}
 	
+	public boolean equals(Object obj)
+	{
+		if(!(obj instanceof Memory))
+			return false;
+		Memory objMem = (Memory)obj;
+		if(this.getName()!=objMem.getName())
+			return false;
+		if(this.getValue()!=objMem.getValue())
+			return false;
+		return true;
+	}
+	
 }
