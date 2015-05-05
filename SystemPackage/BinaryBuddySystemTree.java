@@ -23,12 +23,13 @@ public class BinaryBuddySystemTree
 	}
 
 	//method that takes in input from user to set the size of space for memory storage
-	private void setSystemSize(int initial)
+	public int setSystemSize(int initial)
 	{
 			systemSize = initial;
 			Memory x = new Memory(roundSize(systemSize));
 			currentBank.add(x);
-			BBSGUI.drawGUI(systemSize, currentBank); 
+			BBSGUI.drawGUI(systemSize, currentBank);
+			return roundSize(systemSize);
 	}
 
 	private Memory createProcess(int memSize, String name)
@@ -39,7 +40,7 @@ public class BinaryBuddySystemTree
 				return newProcess;
 	}
 	
-	public void addProcess(int memSize, String name)
+	public boolean addProcess(int memSize, String name)
 	{
 		Memory newProcess = createProcess(memSize, name);
 		for(int i = 0; i<currentBank.size(); i++)
